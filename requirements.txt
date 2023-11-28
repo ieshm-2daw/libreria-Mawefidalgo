@@ -1,0 +1,3 @@
+Django
+
+python -m pip install Pillow

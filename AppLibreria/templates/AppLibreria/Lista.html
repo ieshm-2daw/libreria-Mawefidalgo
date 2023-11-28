@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Listado</title>
+    </head>
+    <body>
+        <h2>Listado libros</h2>
+        <ul>
+            {% for lista in lista %}
+            <li>
+                <a href="{% url 'detalles' pk=libros.pk %}">{{ lista.titulo }}</a>
+            </li>
+            {% empty %}
+            <p>No hay libros disponibles</p>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
