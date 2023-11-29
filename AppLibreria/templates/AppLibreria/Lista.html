@@ -4,10 +4,13 @@
     </head>
     <body>
         <h2>Listado libros</h2>
+        <button type="submit"><a href="{%url 'crear' %}">Crear libro</a></button>
         <ul>
-            {% for lista in lista %}
+            {% for object in object_list %}
             <li>
-                <a href="{% url 'detalles' pk=libros.pk %}">{{ lista.titulo }}</a>
+
+                <a href="{% url 'detalles' pk=object.pk %}">{{ object.titulo }}</a>
+                <img src="{{ object.portada.url }}" alt="">
             </li>
             {% empty %}
             <p>No hay libros disponibles</p>

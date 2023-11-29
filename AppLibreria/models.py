@@ -6,7 +6,7 @@ from django.core.validators import MaxValueValidator
 class Usuario(AbstractUser):
     dni = models.CharField(max_length=10)
     direccion = models.TextField()
-    telefono = models.IntegerField()
+    telefono = models.IntegerField(null=True)
 
     def __str__(self):
         return self.dni
@@ -34,9 +34,9 @@ class Libro(models.Model):
     editorial= models.ForeignKey(Editorial, on_delete=models.CASCADE)
     rating=models.PositiveIntegerField(validators=[MaxValueValidator(5)], null=True)
     fechapubli= models.DateField()
-    genero= models.CharField
+    genero= models.CharField(max_length=50)
     ISBN=models.CharField(max_length=13)
-    resumen=models.TextField
+    resumen=models.TextField()
 
     DISPONIBILIDAD_CHOICES=( 
         ('disponible','Disponible'),
