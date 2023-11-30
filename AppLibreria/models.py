@@ -53,7 +53,7 @@ class Libro(models.Model):
 class Prestamo(models.Model):
     libro= models.ForeignKey(Libro, on_delete=models.CASCADE)
     fechaPrestamo = models.DateField()
-    fechaDevolucion = models.DateField()
+    fechaDevolucion = models.DateField(null=True)
     usuario= models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     ESTADO_CHOICES=(

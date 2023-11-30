@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from .models import Libro
+from .models import Libro, Prestamo
 from django.urls import reverse_lazy
 from django.views import View
 from typing import Any
+from .forms import PrestamoForm
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 # Create your views here.
 class Listado(ListView):
@@ -43,3 +44,8 @@ class Editar(UpdateView):
      fields = ['titulo','autor','editorial','rating','fechapubli','genero','ISBN','resumen','disponibilidad','portada']
      template_name = 'AppLibreria/editar.html'
      success_url = reverse_lazy('Listado')
+
+class Prestamo(View):
+     template_name = 'AppLibreria/prestamo.html'
+     prestamo = PrestamoForm.objects.all()
+     def 
