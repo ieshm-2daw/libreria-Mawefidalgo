@@ -10,7 +10,9 @@
             <li>
 
                 <a href="{% url 'detalles' pk=object.pk %}">{{ object.titulo }}</a>
-                <img src="{{ object.portada.url }}" alt="">
+                <img src="{{ object.portadas.url }}" alt="">
+                <button type="submit"><a href="{% url 'borrar' pk=object.pk %}">Borrar libro</a></button>
+                <button type="submit"><a href="{% url 'editar' pk=object.pk %}">Editar libro</a></button>
             </li>
             {% empty %}
             <p>No hay libros disponibles</p>
