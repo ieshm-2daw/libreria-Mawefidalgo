@@ -12,9 +12,9 @@
             <p><b>ISBN: </b>{{libro.ISBN}}</p>
             <p><b>Autor: </b>{{libro.autor}}</p>
             <p><b>Resumen: </b>{{libro.resumen}}</p>
-            <p><b>Portada: </b>{{libro.portada}}</p>
+            <p><b>Portada: </b>{{libro.portada.url}}</p>
         </div>
         <button type="submit"><a href="{% url 'Listado' %}">Volver al listado</a></button>
-        <button type="submit"><a href="{% url 'prestamo' %}">Realizar prestamo</a></button>
+        <button type="submit"><a href="{% url 'prestamo' pk=object.pk %}">Realizar prestamo</a></button>
     </body>
 </html>

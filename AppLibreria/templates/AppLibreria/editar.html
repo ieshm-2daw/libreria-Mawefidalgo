@@ -3,10 +3,10 @@
     </head>
     <body>
         <h1>Editar libro</h1>
-        <form action="{ url 'editar' pk=object.pk}" method="post">
+        <form method="post">
             {% csrf_token %}
-            {{ form_as.p }}
-            <input type="submit" name="editar" value="Guardar">
+            {{ form.as_p }}
+            <input type="submit" name="editado" value="Guardar">
         </form>
     </body>
 </html>

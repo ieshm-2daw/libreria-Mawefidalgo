@@ -1,12 +1,16 @@
 <html>
     <head><title>Realizar prestamo</title></head>
     <body>
-        <h3>Acerca del libro</h3>
+        <h3>Acerca de la reserva</h3>
         <div>
-            <p><b>Titulo: </b>{{ object.titulo }}</p>
-            <p><b>Autor: </b>{{ object.autor }}</p>
-            <p><b>Resumen: </b>{{ object.resumen }}</p>
-            <input type="submit" value="Confirmar">
+            <p><b>Titulo: </b>{{ libro.titulo }}</p>
+            <p><b>Autor: </b>{{ libro.autor }}</p>
+            <p><b>Resumen: </b>{{ libro.resumen }}</p>
+            <form method="post">
+                {% csrf_token %}
+                <input type="submit" value="Confirmar prestamo">
+            </form>
+            <!-- <button type="submit"><a href="{% url 'Listado' %}">Confirmar</a></button> -->
         </div>
     </body>
 </html>

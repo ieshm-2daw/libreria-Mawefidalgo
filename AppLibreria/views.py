@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from datetime import date, timedelta
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Libro, Prestamo
 from django.urls import reverse_lazy
 from django.views import View
@@ -15,7 +16,7 @@ class Listado(ListView):
 
     def get_context_data(self, **kwargs: Any) -> dict:
             context = super().get_context_data(**kwargs)
-
+ 
             context['libro_disponibles'] = Libro.objects.filter(disponibilidad="disponible")
             context['libros_prestados'] = Libro.objects.filter(disponibilidad="prestado")
 
@@ -45,7 +46,30 @@ class Editar(UpdateView):
      template_name = 'AppLibreria/editar.html'
      success_url = reverse_lazy('Listado')
 
-class Prestamo(View):
-     template_name = 'AppLibreria/prestamo.html'
-     prestamo = PrestamoForm.objects.all()
-     def 
+class PrestamoView(View):
+     
+     def get(self, request, pk):
+        libro = get_object_or_404(Libro, pk=pk)
+        return render(request, 'AppLibreria/prestamo.html', {"libro":libro})
+
+     def post(self, request, pk):
+          libro = get_object_or_404(Libro, pk=pk)
+          libro.disponibilidad = "prestado"
+          libro.save()
+          
+          fecha_Devolucion = date.today() + timedelta(days=15)
+          
+          Prestamo.objects.create(
+               libro=libro,
+               fechaPrestamo=date.today(),
+               fechaDevolucion = fecha_Devolucion,
+               usuario = request.user,
+               estadoPrestamo = 'prestado'
+          )
+          return redirect('Listado')
+
+# class DevolucionView(View):
+class ListTodosLibros(ListView):
+
+    model = Libro
+    template_name = 'AppLibreria/Todos.html'

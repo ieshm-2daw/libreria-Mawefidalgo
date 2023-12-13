@@ -5,6 +5,7 @@
     <body>
         <h2>Listado libros</h2>
         <button type="submit"><a href="{%url 'crear' %}">Crear libro</a></button>
+        <button type="submit"><a href="{%url 'todos' %}">Mis libros</a></button>
         <ul>
             {% for object in object_list %}
             <li>
@@ -13,7 +14,7 @@
                 <img src="{{ object.portadas.url }}" alt="">
                 <button type="submit"><a href="{% url 'borrar' pk=object.pk %}">Borrar libro</a></button>
                 <button type="submit"><a href="{% url 'editar' pk=object.pk %}">Editar libro</a></button>
-            </li>
+            </li> 
             {% empty %}
             <p>No hay libros disponibles</p>
             {% endfor %}
