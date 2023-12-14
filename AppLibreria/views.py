@@ -68,8 +68,41 @@ class PrestamoView(View):
           )
           return redirect('Listado')
 
-# class DevolucionView(View):
+class DevolucionView(View):
+
+     def get(self, request, pk):
+        libro = get_object_or_404(Libro, pk=pk)
+        return render(request, 'AppLibreria/devolucion.html', {"libro":libro})
+
+     def post(self, request, pk):
+          libro = get_object_or_404(Libro, pk=pk)
+          libro.disponibilidad = "disponible"
+          libro.save()
+          
+          fecha_Prestamo = date.today() - timedelta(days=15)
+          
+          
+          Prestamo.objects.create(
+               libro=libro,
+               fechaPrestamo=fecha_Prestamo,
+               fechaDevolucion = date.today(),
+               usuario = request.user,
+               estadoPrestamo = 'devuelto'
+          )
+          return redirect('Listado')
+     
+
 class ListTodosLibros(ListView):
 
     model = Libro
     template_name = 'AppLibreria/Todos.html'
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+         
+         context = super().get_context_data(**kwargs)
+
+         context['libros_devueltos'] = Prestamo.objects.filter(usuario=self.request.user, estadoPrestamo='devuelto')
+         context['libros_prestados'] = Prestamo.objects.filter(usuario=self.request.user, estadoPrestamo='prestado')
+
+         return context
+    

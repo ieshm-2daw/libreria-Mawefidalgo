@@ -1,19 +1,20 @@
 <html>
     <head>
         <title>Listado</title>
+        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"&gt;>
     </head>
     <body>
         <h2>Listado libros</h2>
         <button type="submit"><a href="{%url 'crear' %}">Crear libro</a></button>
         <button type="submit"><a href="{%url 'todos' %}">Mis libros</a></button>
         <ul>
-            {% for object in object_list %}
+            {% for libro in libro_list %}
             <li>
 
-                <a href="{% url 'detalles' pk=object.pk %}">{{ object.titulo }}</a>
-                <img src="{{ object.portadas.url }}" alt="">
-                <button type="submit"><a href="{% url 'borrar' pk=object.pk %}">Borrar libro</a></button>
-                <button type="submit"><a href="{% url 'editar' pk=object.pk %}">Editar libro</a></button>
+                <a href="{% url 'detalles' pk=libro.pk %}">{{ libro.titulo }}</a>
+                <img src="{{ libro.libro.portadas.url }}" alt="">
+                <button type="submit"><a href="{% url 'borrar' pk=libro.pk %}">Borrar libro</a></button>
+                <button type="submit"><a href="{% url 'editar' pk=libro.pk %}">Editar libro</a></button>
             </li> 
             {% empty %}
             <p>No hay libros disponibles</p>

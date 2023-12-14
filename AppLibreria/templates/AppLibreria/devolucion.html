@@ -1,5 +1,5 @@
 <html>
-    <head><title>Realizar prestamo</title>
+    <head><title>Realizar devolucion</title>
         <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"&gt;></head>
     <body>
         <h3>Acerca de la reserva</h3>
@@ -9,9 +9,8 @@
             <p><b>Resumen: </b>{{ libro.resumen }}</p>
             <form method="post">
                 {% csrf_token %}
-                <input type="submit" value="Confirmar prestamo">
+                <input type="submit" value="Confirmar devolucion">
             </form>
-            <!-- <button type="submit"><a href="{% url 'Listado' %}">Confirmar</a></button> -->
         </div>
     </body>
 </html>

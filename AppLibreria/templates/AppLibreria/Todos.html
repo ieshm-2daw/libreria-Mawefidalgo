@@ -1,24 +1,31 @@
 <html>
     <head>
         <title>Listado</title>
+        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"&gt;>
     </head>
     <body>
-        <h2>Listado libros disponible</h2>
+        <h1>Mis libros</h1>
+        <h2>Listado libros disponibles</h2>
         <ul>
-            {% for object in object_list %}
-            <li>
-
-                {% if libro.disponibilidad %}
-                <p>{ libro.titulo }</p>
-
-                {% else %}
-                   <p>No hay libros disponibles</p>
-
-                {% endif %}
-            </li> 
+            {% for libro in libros_devueltos %}
+                <li>
+                    {{ libro.libro }}
+                </li> 
             {% empty %}
-            <p>No hay libros disponibles</p>
+                <li>No hay libros disponibles</li>
             {% endfor %}
         </ul>
+        <h2>Listado libros prestados</h2>
+        <ul>
+            {% for libro in libros_prestados %}
+            <li>
+                {{ libro.libro }}
+                <button type="submit"><a href="{% url 'devolucion' pk=libro.pk %}">Devolver libro</a></button>
+            </li> 
+            {% empty %}
+            <li>No hay libros prestados</li>
+            {% endfor %}
+        </ul>
+        <button type="submit"><a href="{%url 'Listado' %}">Volver al listado principal</a></button>
     </body>
 </html>

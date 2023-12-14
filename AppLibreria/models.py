@@ -44,7 +44,7 @@ class Libro(models.Model):
         ('en_proceso', 'En_Proceso'),
     )
     disponibilidad=models.CharField(max_length=20, choices=DISPONIBILIDAD_CHOICES, default='disponible')
-    portada = models.ImageField(upload_to='portadas/', null=True)
+    portada = models.ImageField(upload_to='portadas/', null=True, blank=True)
 
     def __str__(self):
         return self.titulo
