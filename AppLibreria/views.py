@@ -78,17 +78,10 @@ class DevolucionView(View):
           libro = get_object_or_404(Libro, pk=pk)
           libro.disponibilidad = "disponible"
           libro.save()
-          
-          fecha_Prestamo = date.today() - timedelta(days=15)
-          
-          
-          Prestamo.objects.create(
-               libro=libro,
-               fechaPrestamo=fecha_Prestamo,
-               fechaDevolucion = date.today(),
-               usuario = request.user,
-               estadoPrestamo = 'devuelto'
-          )
+          prestamo = Prestamo.objects.filter(libro=libro,estadoPrestamo='prestado',usuario=request.user).first()
+          prestamo.estadoPrestamo = "devuelto"
+          prestamo.fechaDevolucion= date.today()
+          prestamo.save()     
           return redirect('Listado')
      
 
@@ -96,6 +89,8 @@ class ListTodosLibros(ListView):
 
     model = Libro
     template_name = 'AppLibreria/Todos.html'
+    queryset = Libro.objects.filter(disponibilidad="prestado")
+    
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
          

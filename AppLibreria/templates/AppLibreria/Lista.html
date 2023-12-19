@@ -1,18 +1,24 @@
+{% load static %}
 <html>
     <head>
         <title>Listado</title>
         <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"&gt;>
+        <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
     </head>
     <body>
         <h2>Listado libros</h2>
         <button type="submit"><a href="{%url 'crear' %}">Crear libro</a></button>
         <button type="submit"><a href="{%url 'todos' %}">Mis libros</a></button>
+        <form method="post">
+            <input type="text" name="filtro1" placeholder="filtro1">
+            <button type="submit">Aplicar filtro</button>
+        </form>
         <ul>
-            {% for libro in libro_list %}
+            {% for libro in object_list %}
             <li>
 
                 <a href="{% url 'detalles' pk=libro.pk %}">{{ libro.titulo }}</a>
-                <img src="{{ libro.libro.portadas.url }}" alt="">
+                <img src="{{ libro.portada.url }}">
                 <button type="submit"><a href="{% url 'borrar' pk=libro.pk %}">Borrar libro</a></button>
                 <button type="submit"><a href="{% url 'editar' pk=libro.pk %}">Editar libro</a></button>
             </li> 

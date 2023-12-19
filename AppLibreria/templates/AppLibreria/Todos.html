@@ -9,7 +9,7 @@
         <ul>
             {% for libro in libros_devueltos %}
                 <li>
-                    {{ libro.libro }}
+                    {{ libro.libro }}<img src="{{ libro.libro.portada.url }}">
                 </li> 
             {% empty %}
                 <li>No hay libros disponibles</li>
@@ -19,8 +19,8 @@
         <ul>
             {% for libro in libros_prestados %}
             <li>
-                {{ libro.libro }}
-                <button type="submit"><a href="{% url 'devolucion' pk=libro.pk %}">Devolver libro</a></button>
+                {{ libro.libro }}<img src="{{ libro.libro.portada.url }}">
+                <button type="submit"><a href="{% url 'devolucion' pk=libro.libro.pk %}">Devolver libro</a></button>
             </li> 
             {% empty %}
             <li>No hay libros prestados</li>
