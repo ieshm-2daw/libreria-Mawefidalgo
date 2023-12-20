@@ -1,6 +1,6 @@
 from datetime import date, timedelta
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Libro, Prestamo
+from .models import Libro, Prestamo, Autor
 from django.urls import reverse_lazy
 from django.views import View
 from typing import Any
@@ -11,16 +11,28 @@ class Listado(ListView):
 
     model = Libro
     template_name = 'AppLibreria/Lista.html'
-    queryset = Libro.objects.filter(disponibilidad="disponible")
+    
 
 
-    def get_context_data(self, **kwargs: Any) -> dict:
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
             context = super().get_context_data(**kwargs)
- 
+            context['autores'] = Autor.objects.all()
+
+
+            a = self.request.GET.get('autor')
+
+
             context['libro_disponibles'] = Libro.objects.filter(disponibilidad="disponible")
             context['libros_prestados'] = Libro.objects.filter(disponibilidad="prestado")
+            
 
+            if a != "all" and a != None:
+                 autor = Autor.objects.get(nombre=a)
+                 context['libro_disponibles'] = context['libro_disponibles'].filter(autor=autor)
+                 context['libros_prestados'] = context['libros_prestados'].filter(autor=autor)
             return context
+    
+    
 
 class Detalles(DetailView):
 

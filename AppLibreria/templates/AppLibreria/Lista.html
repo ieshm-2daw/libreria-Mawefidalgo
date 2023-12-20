@@ -9,9 +9,16 @@
         <h2>Listado libros</h2>
         <button type="submit"><a href="{%url 'crear' %}">Crear libro</a></button>
         <button type="submit"><a href="{%url 'todos' %}">Mis libros</a></button>
-        <form method="post">
-            <input type="text" name="filtro1" placeholder="filtro1">
-            <button type="submit">Aplicar filtro</button>
+        <form method="get" name="formulario">
+            {% csrf_token %}
+            <label>Autor</label>
+            <select name="autor" id="autor">
+                <option value="all">Todos</option>
+                {% for autor in autores %}
+                <option value="{{ autor }}">{{ autor.nombre }}</option>
+                {% endfor %}
+                <input type="submit" value="filtrar">
+            </select>
         </form>
         <ul>
             {% for libro in object_list %}
