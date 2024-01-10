@@ -6,12 +6,15 @@
     <body>
         <h2>Detalles del libro: {{libro.titulo}} </h2>
         <div>
-            <p><b>Autor: </b>{{libro.autor}}</p>
+            <p><b>Autor: </b>
+                {% for autor in libro.autor.all %}
+                                         <!-- Para que muestre un punto al final, el forloop  -->
+                    {{ autor.nombre }}{% if not forloop.last %}, {%endif %}
+                {% endfor %}</p>
             <p><b>Editorial: </b>{{libro.editorial}}</p>
             <p><b>Fecha de publicacion: </b>{{libro.fechapubli}}</p>
             <p><b>Genero: </b>{{libro.genero}}</p>
             <p><b>ISBN: </b>{{libro.ISBN}}</p>
-            <p><b>Autor: </b>{{libro.autor}}</p>
             <p><b>Resumen: </b>{{libro.resumen}}</p>
             <p><b>Portada: </b>{{libro.portada.url}}</p>
         </div>

@@ -21,7 +21,7 @@ class Listado(ListView):
 
             a = self.request.GET.get('autor')
 
-
+           
             context['libro_disponibles'] = Libro.objects.filter(disponibilidad="disponible")
             context['libros_prestados'] = Libro.objects.filter(disponibilidad="prestado")
             

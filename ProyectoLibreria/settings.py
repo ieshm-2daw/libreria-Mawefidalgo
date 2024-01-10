@@ -76,11 +76,27 @@ WSGI_APPLICATION = 'ProyectoLibreria.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'NAME': 'ManuFidalgo',
+#         'ENGINE': 'mysql.connector.django',
+#         'HOST': '192.168.100.5',
+#         'PORT': 3306,
+#         'USER': 'mysql_user',
+#         'PASSWORD': 'alumnado',
+#         'OPTIONS': {
+#           'autocommit': True,
+#           'use_oure': True,
+#           'init_command': "SET foo='bar';"
+#         },
+#     }
+# }
 
 
 # Password validation

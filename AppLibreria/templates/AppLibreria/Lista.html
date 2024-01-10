@@ -25,7 +25,9 @@
             <li>
 
                 <a href="{% url 'detalles' pk=libro.pk %}">{{ libro.titulo }}</a>
-                <img src="{{ libro.portada.url }}">
+                {% if libro.portada %}
+                    <img src="{{ libro.portada.url }}">
+                {% endif %}
                 <button type="submit"><a href="{% url 'borrar' pk=libro.pk %}">Borrar libro</a></button>
                 <button type="submit"><a href="{% url 'editar' pk=libro.pk %}">Editar libro</a></button>
             </li> 
