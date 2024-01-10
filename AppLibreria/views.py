@@ -1,13 +1,14 @@
 from datetime import date, timedelta
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Libro, Prestamo, Autor
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import View
 from typing import Any
 from .forms import PrestamoForm
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 # Create your views here.
-class Listado(ListView):
+class Listado(LoginRequiredMixin ,ListView):
 
     model = Libro
     template_name = 'AppLibreria/Lista.html'

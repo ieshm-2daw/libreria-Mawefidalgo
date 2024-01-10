@@ -7,18 +7,19 @@
     </head>
     <body>
         <h2>Listado libros</h2>
-        <button type="submit"><a href="{%url 'crear' %}">Crear libro</a></button>
-        <button type="submit"><a href="{%url 'todos' %}">Mis libros</a></button>
+        <a href="{% url 'logout' %}">Cerrar sesion</a>
+        <a href="{%url 'crear' %}">Crear libro</a>
+        <a href="{%url 'todos' %}">Mis libros</a>
         <form method="get" name="formulario">
             {% csrf_token %}
             <label>Autor</label>
             <select name="autor" id="autor">
                 <option value="all">Todos</option>
                 {% for autor in autores %}
-                <option value="{{ autor }}">{{ autor.nombre }}</option>
+                  <option value="{{ autor }}">{{ autor.nombre }}</option>
                 {% endfor %}
-                <input type="submit" value="filtrar">
             </select>
+            <input type="submit" value="filtrar">
         </form>
         <ul>
             {% for libro in object_list %}
@@ -28,8 +29,8 @@
                 {% if libro.portada %}
                     <img src="{{ libro.portada.url }}">
                 {% endif %}
-                <button type="submit"><a href="{% url 'borrar' pk=libro.pk %}">Borrar libro</a></button>
-                <button type="submit"><a href="{% url 'editar' pk=libro.pk %}">Editar libro</a></button>
+               <a href="{% url 'borrar' pk=libro.pk %}">Borrar libro</a>
+               <a href="{% url 'editar' pk=libro.pk %}">Editar libro</a>
             </li> 
             {% empty %}
             <p>No hay libros disponibles</p>

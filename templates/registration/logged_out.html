@@ -1,0 +1,11 @@
+<html>
+    <head>
+        Cierre de sesion
+    </head>
+    <body>
+        {% block content %}
+        <h2>Sesion cerrada</h2>
+        <p>Si lo deseas <a href="{% url 'login' %}">inicia sesion</a> de nuevo</p>
+        {% endblock %}
+    </body>
+</html>
