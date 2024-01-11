@@ -10,17 +10,6 @@
         <a href="{% url 'logout' %}">Cerrar sesion</a>
         <a href="{%url 'crear' %}">Crear libro</a>
         <a href="{%url 'todos' %}">Mis libros</a>
-        <form method="get" name="formulario">
-            {% csrf_token %}
-            <label>Autor</label>
-            <select name="autor" id="autor">
-                <option value="all">Todos</option>
-                {% for autor in autores %}
-                  <option value="{{ autor }}">{{ autor.nombre }}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="filtrar">
-        </form>
         <ul>
             {% for libro in object_list %}
             <li>
@@ -35,6 +24,17 @@
             {% empty %}
             <p>No hay libros disponibles</p>
             {% endfor %}
+            <form method="get" name="frm">
+                {% csrf_token %}
+                <label>Autor</label>
+                <select name="autor" id="autor">
+                    <option value="all"{% if not request.GET.autor %} selected {% endif %}>Todos</option>
+                    {% for autor in autores %}
+                      <option value="{{ autor.nombre }}" {% if request.GET.autor == autor.nombre %}selected{% endif %}>{{ autor.nombre }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="filtrar">
+            </form>
         </ul>
     </body>
 </html>

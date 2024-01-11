@@ -17,20 +17,24 @@ class Listado(LoginRequiredMixin ,ListView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
             context = super().get_context_data(**kwargs)
-            context['autores'] = Autor.objects.all()
+            
 
 
             a = self.request.GET.get('autor')
 
-           
+            context['autores'] = Autor.objects.all()
+           # Filtramos los libros por prestados y disponibles
             context['libro_disponibles'] = Libro.objects.filter(disponibilidad="disponible")
             context['libros_prestados'] = Libro.objects.filter(disponibilidad="prestado")
             
-
+           # Cambios de contexto
             if a != "all" and a != None:
                  autor = Autor.objects.get(nombre=a)
                  context['libro_disponibles'] = context['libro_disponibles'].filter(autor=autor)
                  context['libros_prestados'] = context['libros_prestados'].filter(autor=autor)
+
+            
+            
             return context
     
     
